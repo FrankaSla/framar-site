@@ -112,6 +112,7 @@ public class PageController {
             mailService.sendContact(ime, email, poruka);
             ra.addFlashAttribute("successMessage", "Poruka je poslana. Javit ćemo se uskoro.");
         } catch (Exception e) {
+        	e.printStackTrace();
             ra.addFlashAttribute("errorMessage", "Došlo je do greške pri slanju. Pokušajte ponovno.");
         }
 
