@@ -1,26 +1,27 @@
 package com.framar.site.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.framar.site.service.MailService;
 import com.framar.site.service.ProjectService;
 
 @Controller
 public class PageController {
 
     private final ProjectService projectService;
+    private final MailService mailService;   
 
-    public PageController(ProjectService projectService) {
+    public PageController(ProjectService projectService, MailService mailService ) {
         this.projectService = projectService;
-    }
-    
-    private final MailService mailservice;
-    
-    public PageController(MailService mailService) {
-    	this.mailservice = mailservice;
+        this.mailService = mailService;
     }
 
     // helper: složi canonical URL (radi i na localhostu)
