@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="hr" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head(${pageTitle}, ${pageDesc}, ${ogImage}, ${ogUrl})}"></head>	
+<body>
+	<div class="layout">
+		<div th:replace="~{fragments/sidebar :: sidebar('projekti')}"></div>
+		
+		<main class="content">
+			<section class="card">
+				<a class="btn btn-ghost" th:href="@{/projekti}">← Nazad na projekte</a>
+				
+				<h1 th:text="${project.title}">Projekt</h1>
+				<p class="muted">
+					<strong th:text="${project.type}">Tip</strong> ·
+					<span th:text="${project.location}">Lokacija</span> ·
+					<span th:text="${project.year}">Godina</span>
+				</p>
+				
+				<p th:text="${project.description}">Opis</p>
+			</section>
+			
+			<section class="card">
+				<h2>Tijek gradnje - galerija</h2>
+				<p class="muted">Klikni na sliku za uvećanje.Koristi ← → ili swipe.</p>
+				
+				<div class="gallery-grid" id="galleryGrid">
+					<button class="gallery-item"
+					        th:each="m,stat : ${project.media}"
+					        type="button"
+					        th:attr="data-type=${m.type}, data-src=${m.src}, data-poster=${m.poster}"
+					        th:onclick="|openFromGalleryIndex(${stat.index})|">
+
+					  <img th:if="${m.type == 'image'}"
+					       th:src="@{${m.src}}"
+						   th:alt="${'Galerija - ' + project.title + ' ('  + (stat.index + 1) + ')'}"
+					       loading="lazy">
+
+					  <div th:if="${m.type == 'video'}" 
+					  	   class="video-thumb" 
+						   role="img"
+						   tabindex="0"
+					  	   th:attr="aria-label=${project.title} + ' - video (galerija ' + (${stat.index} + 1) + ')'"
+						   
+					       th:style="|background-image:url('@{${m.poster != null ? m.poster : project.coverImage}}')|">
+					    <span class="lb-play">▶</span>
+					  </div>
+
+					</button>
+				</div>
+			</section>
+			
+			<!-- Lightbox -->
+			<div id="lightbox" class="lightbox" aria-hidden="true">
+				<div class="lb-backdrop" data-lb-close></div>
+				
+					<button id="lbClose" type="button" class="lb-btn lb-close" aria-label="Zatvori">X</button>
+					<button id="lbPrev"  type="button" class="lb-btn lb-prev"  aria-label="Prethodno">‹</button>
+					<button id="lbNext"  type="button" class="lb-btn lb-next"  aria-label="Sljedeće">›</button>
+				
+				<div id="lbStage" class="lb-stage"></div>
+				<div  id="lbThumbs" class="lb-thumbs"></div>
+			</div>
+			
+		</main>
+	</div>
+	
+	<script th:src="@{/js/lightbox.js}"></script>
+	
+	<script type="application/ld+json" th:inline="text">
+	{
+	  "@context": "https://schema.org",
+	  "@type": "WebPage",
+	  "name": "[[${#strings.escapeJavaScript(project.title)}]] - FRAMAR",
+	  "description": "[[${#strings.escapeJavaScript(project.description)}]]",
+	  "url": "https://framar.hr/projekti/[[${project.slug}]]",
+	  "image": "https://framar.hr[[${project.coverImage}]] ",
+	  "publisher": {
+	    "@type": "Organization",
+	    "name": "FRAMAR",
+	    "url": "https://framar.hr",
+	    "logo": {
+	      "@type": "ImageObject",
+	      "url": "https://framar.hr/img/logo.png"
+	    }
+	  }
+	}
+	</script>
+
+</body>
+</html>

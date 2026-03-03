@@ -1,0 +1,1386 @@
+/* =========================================================
+   FRAMAR – MARINE THEME (premium)
+   Tamno-plavi sidebar + svijetli "glass" content + podmorje
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   1) THEME VARIJABLE
+   --------------------------------------------------------- */
+:root{
+  --primary:   #0E2A3A;   /* Sidebar */
+  --primary-2: #0A2330;   /* Sidebar gradient */
+  --accent:    #00A3B5;   /* Accent / gumbi */
+  --accent-2:  #008C9C;   /* Hover / gradient */
+  --bg-light:  #F4F7F9;   /* Svijetla baza */
+  --card-bg:   #FFFFFF;   /* Kartice */
+  --border:    #E3E8ED;   /* Border */
+  --text:      #1A1A1A;   /* Tekst */
+  --muted:     #6B7280;   /* Muted tekst */
+
+  --radius:    22px;
+  --radius-lg: 30px;
+
+  --shadow-sm: 0 10px 24px rgba(14,42,58,.08);
+  --shadow:    0 14px 34px rgba(14,42,58,.10);
+  --shadow-lg: 0 26px 70px rgba(14,42,58,.14);
+
+  --content-max: 1500px;
+  --sidebar-w:   300px;
+}
+
+/* ---------------------------------------------------------
+   2) RESET / BASE
+   --------------------------------------------------------- */
+*{ box-sizing: border-box; margin: 0; padding: 0; }
+html, body{ height: 100%; }
+
+body{
+  font-family: Arial, sans-serif;
+  color: var(--text);
+  margin: 0;
+  overflow-x: hidden;
+
+  /* PODMORJE */
+  background: url("/img/underwater.jpg") center / cover no-repeat fixed;
+}
+
+/* lagani morski filter (NE SMIJE BITI PREBIJEL) */
+body::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+
+  /* smanjene alfa vrijednosti da se slika vidi */
+  background:
+    radial-gradient(900px 520px at 72% 18%, rgba(0,163,181,.14), transparent 55%),
+    radial-gradient(800px 520px at 18% 0%,  rgba(14,42,58,.12), transparent 60%),
+    linear-gradient(180deg,
+      rgba(232,245,247,.30) 0%,
+      rgba(244,247,249,.22) 55%,
+      rgba(247,250,251,.28) 100%);
+}
+
+/* sun rays / soft glow */
+body::after{
+  content:"";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  background:
+    radial-gradient(circle at 55% 20%, rgba(255,255,255,.18), transparent 60%),
+    radial-gradient(circle at 65% 65%, rgba(255,255,255,.10), transparent 55%);
+  mix-blend-mode: soft-light;
+}
+
+/* ---------------------------------------------------------
+   4) LAYOUT
+   --------------------------------------------------------- */
+.layout{
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Content područje (desno) */
+.content{
+  margin-left: var(--sidebar-w);
+  width: 100%;
+  padding: 28px 28px 48px;
+  max-width: var(--content-max);
+  margin-right: auto;
+}
+
+/* Da kartice budu centrirane u contentu (kao na mockupu) */
+.content > *{
+  max-width: 1120px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ---------------------------------------------------------
+   5) SIDEBAR
+   --------------------------------------------------------- */
+.sidebar{
+  width: var(--sidebar-w);
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+
+  background: linear-gradient(180deg, var(--primary), var(--primary-2));
+  border-right: 1px solid rgba(255,255,255,.10);
+  padding: 18px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  box-shadow: 8px 0 30px rgba(0,0,0,.10);
+}
+
+.brand{
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 10px;
+  border-radius: 12px;
+}
+
+.brand:hover{ background: rgba(255,255,255,.08); }
+
+.brand-logo{ width: 56px; height: 56px; object-fit: contain; }
+.brand-name{ font-size: 22px; letter-spacing: 1px; }
+.brand-sub{ font-size: 12px; color: rgba(255,255,255,.70); }
+
+.nav{ list-style: none; margin-top: 10px; }
+
+.nav a{
+  display: block;
+  padding: 10px 12px;
+  margin: 6px 0;
+  border-radius: 12px;
+  text-decoration: none;
+  color: rgba(255,255,255,.88);
+  border: 1px solid transparent;
+  transition: background .15s ease, border-color .15s ease;
+}
+
+.nav a:hover{
+  background: rgba(255,255,255,.08);
+  border-color: rgba(255,255,255,.12);
+  color: #fff;
+}
+
+.nav a.active{
+  background: rgba(255,255,255,.15);
+  border-color: rgba(255,255,255,.18);
+  font-weight: bold;
+  color: #fff;
+}
+
+.sidebar-footer{
+  color: rgba(255,255,255,.65);
+  font-size: 12px;
+  padding: 10px;
+}
+
+/* ---------------------------------------------------------
+   6) TIPOGRAFIJA
+   --------------------------------------------------------- */
+h1{ font-size: 34px; margin-bottom: 10px; letter-spacing: .2px; }
+h2{ font-size: 20px; margin-bottom: 8px; }
+p{ line-height: 1.6; margin-bottom: 10px; }
+.muted{ color: var(--muted); }
+.small{ font-size: 12px; }
+
+/* ---------------------------------------------------------
+   7) KARTICE (GLASS)
+   --------------------------------------------------------- */
+   .card{
+     background: rgba(255,255,255,.72);   /* <-- ovo je ključ (nije čista bijela) */
+     border: 1px solid rgba(255,255,255,.55);
+     border-radius: 22px;
+     box-shadow: 0 14px 34px rgba(14,42,58,.12);
+     backdrop-filter: blur(10px);
+
+     padding: 22px;                       /* <-- da tekst ne bježi van */
+     margin-bottom: 18px;
+   }
+
+.card.insert,
+.card.inset{
+  background: rgba(255,255,255,.92);
+}
+
+.card h1, .card h2{
+	line-height: 1.15;
+}
+
+.card p{
+	line-height: 1.75;
+	max-width: 78ch; /* da redovi ne budu predugi*/
+}
+
+.card .muted{
+	font-size: 15px;
+}
+
+/* ---------------------------------------------------------
+   8) HERO (jači kao na desnoj slici)
+   --------------------------------------------------------- */
+.hero{
+  border-radius: var(--radius-lg);
+  padding: 56px;
+
+  background: rgba(255,255,255,.62);
+
+  border: 1px solid rgba(255,255,255,.60);
+  box-shadow: var(--shadow-lg), inset 0 1px 0 rgba(255,255,255,.65);
+  backdrop-filter: blur(12px);
+}
+
+.hero-left{ max-width: 720px; }
+
+.hero h1{
+  font-size: 52px;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.hero .muted{
+  color: rgba(26,26,26,.72);
+  font-size: 16px;
+}
+
+.hero-actions{
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+/* ---------------------------------------------------------
+    USP
+   --------------------------------------------------------- */
+
+.usp{
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	gap: 14px;
+	margin-top: 14px;
+}
+
+.usp-item{
+	background: rgba(255,255,255,.62);
+	border: 1px solid rgba(255,255,255,.55);
+	border-radius: 18px;
+	padding: 16px;
+	backdrop-filter: blur(10px);
+}
+
+.usp-title{ font-weight: 700; margin-bottom: 4px;}
+.usp-desc{ color: var(--muted); margin: 0;}
+
+/* ---------------------------------------------------------
+   9) GRID
+   --------------------------------------------------------- */
+.grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+.section-grid{
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+	gap: 14px;
+	margin-top: 14px;
+}
+
+.panel{
+	background: rgba(255,255,255,.62);
+	border: 1px solid rgba(255,255,255,.55);
+	border-radius: 18px;
+	padding: 18px;
+	backdrop-filter: blur(10px);
+}
+
+.panel h3{
+	margin-bottom: 8px;
+	font-size: 18px;
+}
+
+/* ---------------------------------------------------------
+   10) BADGES / PILLS
+   --------------------------------------------------------- */
+.badges{
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.badge{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.80);
+  border: 1px solid rgba(14,42,58,.12);
+  color: rgba(14,42,58,.86);
+  font-size: 12px;
+}
+
+.project-badge{
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #F1F5F9;
+  color: var(--text);
+  font-size: 12px;
+}
+
+/* ---------------------------------------------------------
+   11) BUTTONS
+   --------------------------------------------------------- */
+.btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 11px 16px;
+  border-radius: 14px;
+  border: 1px solid transparent;
+
+  background: linear-gradient(180deg, var(--accent), var(--accent-2));
+  box-shadow: 0 10px 22px rgba(0,163,181,.20);
+
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+
+  transition: transform .12s ease, filter .12s ease, box-shadow .12s ease;
+}
+
+.btn:hover{
+  filter: brightness(.96);
+  transform: translateY(-1px);
+}
+
+.btn.btn-ghost{
+  background: rgba(255,255,255,.65);
+  border: 1px solid rgba(0,163,181,.35);
+  color: #007f8f;
+  box-shadow: 0 10px 22px rgba(14,42,58,.06);
+}
+
+.btn.btn-ghost:hover{
+  background: var(--accent);
+  color: #fff;
+}
+
+/* ---------------------------------------------------------
+   12) FORMS
+   --------------------------------------------------------- */
+.form{ display: flex; flex-direction: column; gap: 8px; }
+.form label{ color: var(--muted); font-size: 13px; margin-top: 6px; }
+
+.form input,
+.form textarea{
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 12px;
+  color: var(--text);
+  outline: none;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+.form input:focus,
+.form textarea:focus{
+  border-color: rgba(0,163,181,.55);
+  box-shadow: 0 0 0 4px rgba(0,163,181,.12);
+}
+
+/* ---------------------------------------------------------
+   13) ALERT
+   --------------------------------------------------------- */
+.alert{
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(0,0,0,.06);
+  background: #F1F5F9;
+  margin-bottom: 12px;
+}
+
+/* ---------------------------------------------------------
+   14) PROJECT COVER (kartica projekta)
+   --------------------------------------------------------- */
+.project-cover{
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  margin-bottom: 12px;
+}
+
+.project-cover img{
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+.project-link{
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition: transform .12s ease;
+}
+.project-link:hover{ transform: translateY(-2px); }
+
+/* ---------------------------------------------------------
+   15) GALLERY GRID
+   --------------------------------------------------------- */
+.gallery-grid{
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+}
+
+.gallery-item{
+  padding: 0;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,.92);
+  border-radius: var(--radius);
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+}
+
+.gallery-item img{
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  display: block;
+  transition: transform .15s ease;
+}
+
+.gallery-item:hover img{ transform: scale(1.03); }
+
+/* Video thumbnail */
+.video-thumb{
+  width: 100%;
+  height: 280px;
+  background: #111;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lb-play{
+  background: rgba(0,0,0,.55);
+  border: 1px solid rgba(255,255,255,.25);
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 14px;
+  color: #fff;
+}
+
+/* ---------------------------------------------------------
+   17) RESPONSIVE
+   --------------------------------------------------------- */
+@media (max-width: 900px){
+	.layout{ flex-direction: row;}
+	
+	:root{ --sidebar-w: 300px;}
+	body.sidebar-collapsed{ --sidebar-w: 210px:}
+	
+  .sidebar{ 
+	width: var(--sidebar-w); 
+}
+	
+  .content{ 
+	margin-left: var(--sidebar-w); 
+}
+
+
+}
+
+/* =========================
+   SECTIONS / PANELS (layout)
+   ========================= */
+.section-grid{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 14px;
+}
+@media (max-width: 900px){
+  .section-grid{ grid-template-columns: 1fr; }
+}
+
+/* Lakša hero varijanta (za unutarnje stranice) */
+.hero-lite{
+  padding: 34px;
+  border-radius: var(--radius-lg);
+}
+.hero-lite h1{ font-size: 44px; margin-bottom: 8px; }
+
+/* Panel kao “unutarnja kartica” */
+.panel{
+  padding: 22px;
+}
+.panel h2{ margin-bottom: 10px; }
+
+/* =========================
+   LISTE – uredno, bez crtica
+   ========================= */
+.list.clean{
+  margin: 10px 0 0 0;
+  padding-left: 18px;
+}
+.list.clean li{
+  margin: 8px 0;
+}
+
+/* =========================
+   USP (3 highlight kartice)
+   ========================= */
+.usp{
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+@media (max-width: 900px){
+  .usp{ grid-template-columns: 1fr; }
+}
+.usp-item{
+  background: rgba(255,255,255,.75);
+  border: 1px solid rgba(14,42,58,.10);
+  border-radius: 18px;
+  padding: 14px 14px;
+  box-shadow: 0 10px 22px rgba(14,42,58,.06);
+}
+.usp-title{
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.usp-desc{
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+/* =========================
+   HOME – jedna cjelina ispod hero
+   ========================= */
+.home-panel{
+  margin-top: 16px;
+  padding: 18px;
+  border-radius: var(--radius-lg);
+  background: rgba(255,255,255,.85);
+  border: 1px solid rgba(255,255,255,.45);
+  box-shadow: var(--shadow);
+}
+
+/* USP unutar panela (malo kompaktnije) */
+.home-panel .usp{
+  margin-top: 0;
+}
+
+/* Dvije velike kartice za usluge (u istoj cjelini) */
+.home-services{
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+@media (max-width: 900px){
+  .home-services{ grid-template-columns: 1fr; }
+}
+
+/* Unutarnje “service” kartice neka budu malo staklene, ali kao dio panela */
+.service-card{
+  border-radius: 20px;
+  padding: 18px 18px;
+  background: rgba(255,255,255,.78);
+  border: 1px solid rgba(14,42,58,.10);
+  box-shadow: 0 10px 22px rgba(14,42,58,.06);
+}
+
+.service-card h2{ margin-bottom: 8px; }
+.service-card .btn{ margin-top: 10px; }
+
+/* =========================================================
+   PAGE LAYOUT HELPERS (O nama / Usluge)
+   ========================================================= */
+
+.page{ padding: 26px; }
+.page-head{ margin-bottom: 16px; }
+.page-head h1{ margin-bottom: 8px; }
+
+.block{ padding: 18px; }
+.info-grid{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 14px;
+}
+.split{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.info-card h2{ margin-bottom: 10px; }
+
+/* Clean list */
+.clean-list{
+  margin-left: 18px;
+  line-height: 1.65;
+}
+.clean-list li{ margin: 6px 0; }
+
+/* Check list */
+.check-list{
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+.check-list li{
+  position: relative;
+  padding-left: 26px;
+  margin: 10px 0;
+  line-height: 1.5;
+}
+.check-list li::before{
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,163,181,.14);
+  color: #007f8f;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+/* Pills (approach) */
+.pill-grid{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+.pill{
+  padding: 10px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.70);
+  border: 1px solid rgba(14,42,58,.10);
+  box-shadow: 0 8px 18px rgba(14,42,58,.06);
+  font-size: 13px;
+}
+
+/* Mini cards */
+.mini-grid{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 14px;
+}
+.mini{
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: rgba(255,255,255,.70);
+  border: 1px solid rgba(14,42,58,.10);
+}
+.mini-title{
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+/* CTA */
+.cta{
+  margin-top: 14px;
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+.cta-text h2{ margin-bottom: 6px; }
+.cta-actions{ display: flex; gap: 10px; flex-wrap: wrap; }
+
+/* Responsive */
+@media (max-width: 900px){
+  .info-grid, .split{ grid-template-columns: 1fr; }
+  .mini-grid{ grid-template-columns: 1fr; }
+  .cta{ flex-direction: column; align-items: flex-start; }
+}
+
+/* =========================
+   HOME PANEL – premium polish
+   ========================= */
+
+.home-panel{
+  background: rgba(255,255,255,.82);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,.50);
+  box-shadow: 0 18px 40px rgba(14,42,58,.12);
+}
+
+/* USP hover efekt */
+.usp-item{
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.usp-item:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 18px 30px rgba(14,42,58,.15);
+}
+
+/* Jača hijerarhija naslova usluga */
+.service-card h2{
+  font-size: 22px;
+  letter-spacing: .3px;
+}
+
+/* Lagani hover na velike kartice */
+.service-card{
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.service-card:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(14,42,58,.14);
+}
+
+.mini-grid{
+	display: flex !important;
+	flex-direction: column !important;
+	gap: 12px;
+}
+
+.mini{
+	box-shadow: 0 10px 22px rgba(14,42,58,.06);
+	width: 100%;	
+}
+
+/*
+===============================================================================
+		LIGHTBOX - FULLSCREEN + thumbs bar (NO overlap)
+==============================================================================*/
+
+html.lb-open, body.lb-open{ overflow: hidden;}
+
+/*1) FULLSCREEN OVERLAY (pokriva cijeli ekran i sidebar i content)*/
+
+.lightbox{
+	position: fixed;
+	inset: 0;
+	background: rgba(0,0,0,.88);
+	display: none;
+	z-index: 999999;
+	padding: 18px;
+}
+
+.lightbox.open{ display: block;}
+
+/*2) backdrop neka bude FULLSCREEN i ispod svega u lightboxu-u*/
+.lb-backdrop{
+	position: fixed;
+	inset: 0;
+	z-index: 0;
+}
+
+/*3) centriranje slike*/
+.lb-stage{
+	height: calc(100vh - 140px);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	z-index: 1;
+}
+
+/*4) Slika/video*/
+.lb-media{
+	max-width: min(1100px, 92vw);
+	max-height: 78vh;
+	width: auto;
+	height: auto;
+	border-radius: 16px;
+	border: 1px solid rgba(255,255,255,.15);
+	background: #000;	
+}
+
+
+/*5) thumbovi dolje*/
+.lb-thumbs{
+	position: absolute;
+	left: 18px; right: 18px; bottom: 16px;
+	display: flex;
+	gap: 10px;
+	padding: 10px 12px;
+	overflow-x: auto;
+	z-index: 2;
+	background: rgba(0,0,0,.35);
+	border: 1px solid rgba(255,255,255,.12);
+	border-radius: 16px;
+	backdrop-filter: blur(8px);
+}
+
+.lb-thumb{
+	width: 110px;
+	height: 70px;
+	border-radius: 12px;
+	overflow: hidden;
+	border: 1px solid rgba(255,255,255,.18);
+	background: rgba(255,255,255,.06);
+	cursor: pointer;
+	flex: 0 0 auto;
+	padding: 0;
+}
+
+.lb-thumb img{
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+.lb-thumb.active{
+	outline: 2px solid rgba(255,255,255,.45);
+}
+
+/*6) kontrole */
+.lb-btn{
+	position: fixed;
+	z-index: 1000000;
+	width: 48px;
+	height: 48px;
+	border-radius: 14px;
+	border: 1px solid rgba(255,255,255,.22);
+	background: rgba(0,0,0,.35);
+	color: #fff;
+	display: grid;
+	place-items: center;
+	cursor: pointer;
+	user-select: none;
+	backdrop-filter: blur(6px);
+	pointer-events: auto;
+}
+
+.lb-btn:hover{
+	background: rgba(0,0,0,.50);
+}
+
+.lb-close{
+	top: 18px;
+	right: 18px;
+	font-size: 34px;
+	line-height: 1;
+}
+
+.lb-prev{
+	top: 50%;
+	left: 18px;
+	transform: translateY(-50%);
+	font-size: 40px;
+}
+
+.lb-next{
+	top: 50%;
+	right: 18px;
+	transform: translateY(-50%);
+	font-size: 40px;
+}
+
+/* === LIGHTBOX FIX: da se ne otvara sam + tipke rade + overlay normalan === */
+.lightbox { display: none; }
+.lightbox.open { display: block; }
+
+#lightbox{
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0,0,0,.88);
+}
+
+#lbBackdrop{
+  position: absolute;
+  inset: 0;
+}
+
+#lbStage{
+  position: relative;
+  z-index: 1;
+  height: calc(100vh - 140px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+}
+
+#lbStage .lb-media{
+  max-width: min(1100px, 92vw);
+  max-height: 80vh;
+  width: auto;
+  height: auto;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.15);
+  background: #000;
+}
+
+#lbThumbs{
+  position: absolute;
+  left: 0; right: 0;
+  bottom: 16px;
+  z-index: 2;
+}
+
+.lb-btn{
+  position: fixed;
+  z-index: 10002;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.22);
+  background: rgba(0,0,0,.35);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  user-select: none;
+  pointer-events: auto;
+}
+
+#lbClose{ top: 18px; right: 18px; font-size: 34px; line-height: 1; }
+#lbPrev { top: 50%; left: 18px; transform: translateY(-50%); font-size: 40px; }
+#lbNext { top: 50%; right: 18px; transform: translateY(-50%); font-size: 40px; }
+
+
+/* ===========================
+   MOBILE SIDEBAR -> TOP BAR
+   =========================== */
+@media (max-width: 900px){
+
+  :root{
+    --sidebar-w: 100%;
+  }
+
+  /* sidebar više nije visoki stupac */
+  .sidebar{
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: auto;
+    padding: 10px 12px;
+    z-index: 1000;
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,.10);
+    box-shadow: 0 10px 30px rgba(0,0,0,.10);
+  }
+
+  /* brand manji */
+  .brand{
+    padding: 6px 8px;
+    gap: 10px;
+  }
+  .brand-logo{
+    width: 40px;
+    height: 40px;
+  }
+  .brand-name{
+    font-size: 18px;
+    letter-spacing: .6px;
+  }
+  .brand-sub{
+    font-size: 11px;
+  }
+
+  /* nav u 2 reda, kompaktno */
+  .nav{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .nav a{
+    margin: 0;
+    padding: 10px 10px;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 14px;
+  }
+
+  /* content ide normalno ispod */
+  .content{
+    margin-left: 0;
+    padding: 16px;
+    max-width: 100%;
+  }
+
+  /* hero mrvu kompaktniji */
+  .hero{
+    padding: 28px;
+    border-radius: 24px;
+  }
+  .hero h1{
+    font-size: 40px;
+  }
+}
+
+/*============================================
+		SIDEBAR TOGGLE (desktop + mobile)
+============================================*/
+
+/* gumb 3 crtice */
+.sidebar-toggle{
+	margin-left: auto;
+	width: 42px;
+	height: 42px;
+	border: 1px solid rgba(255,255,255,.18);
+	background: rgba(255,255,255,.08);
+	border-radius: 12px;
+	display: grid;
+	place-items: center;
+	cursor: pointer;
+}
+
+.sidebar-toggle:hover{ background: rgba(255,255,255,.12);}
+
+.sidebar-toggle span{
+	display: block;
+	width: 18px;
+	height: 2px;
+	background: rgba(255,255,255,.92);
+	border-radius: 99px;
+	margin: 2px 0;
+}
+
+/*da se brand slozi lijepo*/
+.brand{ display: flex; align-items: center; gap: 12px;}
+.brand-text{ display: block;}
+
+/*====================================================================
+	COLAPSED STATE (dodajemo klasu na <body>: .sidebar-collapsed)
+=====================================================================*/
+
+body.sidebar-collapsed{
+	--sidebar-w: 88px; /*sirina sklopljenog sidebara*/
+}
+
+body.sidebar-collapsed .brand{
+	justify-content: center;
+}
+
+body.sidebar-collapsed .brand-text{
+	display: none; /*sakrij FRAMAR tekst + podnaslovi*/
+}
+
+/*sakrij tekst linkova u meniju (ostavi padding da izgleda kao ikone)*/
+body.sidebar-collapsed .nav a{
+	text-align: center;
+	padding: 12px;
+}
+
+.content { margin-left: var(--sidebar-w);}
+
+/*======================================================
+	MOBILE DRAWER SIDEBAR
+=======================================================*/
+
+@media (max-width: 900px){
+	
+	/*content puni ekran*/
+	:root{ --sidebar-w: 280px;} /*sirina drawera*/
+	
+	.content{
+		margin-left: 0 !important;
+		max-width: 100%;
+	}
+	
+	/*sidebar kao drawer*/
+	.sidebar{
+		position: fixed;
+		top: 0; left: 0; bottom: 0;
+		height: 100vh;
+		width: var(--sidebar-w);
+		transform: translateY(-105%); /*default zatvoren*/
+		transition: transfrom .18s ease;
+		z-index: 10000;
+	}
+	
+	/*kad je otvoren*/
+	body.sidebar-open .sidebar{
+		transform: translateX(0);
+	}
+	
+	/*tamna pozadina izad drawera*/
+	.sidebar-backdrop{
+		position: fixed;
+		inset: 0;
+		background: rgba(0,0,0,.45);
+		z-index: 9999;
+		opacity: 0;
+		pointer-events: none;
+		transition: opacity .18s ease;
+	}
+	
+	body.sidebar-open .sidebar-backdrop{
+		opacity: 1;
+		pointer-events: auto;
+	}	
+}
+
+.sidebar-toggle{
+	margin-left: auto;
+	margin-top: 6px;
+	width: 44px;
+	height: 44px;
+	border-radius: 12px;
+	border: 1px solid rgba(255,255,255,.14);
+	background: rgba(255,255,255,.08);
+	color: #fff;
+	cursor: pointer;
+	display: grid;
+	place-items: center;
+}
+
+.sidebar-toggle:hover{
+	background: rgba(255,255,255,.14);
+}
+
+/*Hamburger vidljiv samo na mobitelu*/
+.mobile-nav-toggle{
+	display: none;
+}
+
+@media (max-width: 900px){
+	
+	.mobile-nav-toggle{
+		display: grid;
+		place-items: center;
+		position: fixed;
+		top: 12px;
+		left: 12px;
+		z-index: 10001;
+		
+		width: 44px;
+		height: 44px;
+		border-radius: 12px;
+		border: 1px solid rgba(255,255,255,.14);
+		background: rgba(14,42,58,.75);
+		color: #fff;
+		cursor: pointer;
+		backdrop-filter: blur(6px);
+	}
+	
+	.mobile-nav-toggle:hover{
+		background: rgba(14,42,58,.88);
+	}
+	
+	/*mobitel: content ide full width*/
+	.content{
+		margin-left: 0 !important;
+		max-width: 100%;
+	}
+	
+	/*sidebar drawer*/
+	.sidebar{
+		position: fixed;
+		top: 0; left: 0; bottom: 0;
+		height: 100vh;
+		width: 280px;
+		transform: translateX(-105%);
+		transition: transform .18s ease;
+		z-index: 10000;
+	}
+	
+	body.sidebar-open .sidebar{
+		transform: translateX(0);
+	}
+	
+	/*backdrop*/
+	.sidebar-backdrop{
+		position: fixed;
+		inset: 0;
+		background: rgba(0,0,0,.45);
+		z-index: 9999;
+		opacity: 0;
+		pointer-events: none;
+		transition: opacity .18s ease;
+	}
+	
+	body.sidebar-open .sidebar-backdrop{
+		opacity: 1;
+		pointer-events: auto;
+	}
+}
+	
+/* hamburger - default (desktop) */
+.hamburger{
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.10);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  z-index: 20000;
+}
+
+/* desktop: pomakni hamburger da bude uz sidebar (desno od njega) */
+@media (min-width: 901px){
+  .hamburger{
+    left: calc(var(--sidebar-w) - 58px); /* fino sjedne u sidebar zonu */
+  }
+}
+
+/* mobitel: sidebar off-canvas + backdrop */
+@media (max-width: 900px){
+  .sidebar{
+    position: fixed;
+    top: 0; left: 0; bottom: 0;
+    width: min(320px, 82vw);
+    transform: translateX(-105%);
+    transition: transform .18s ease;
+    z-index: 15000;
+  }
+
+  body.sidebar-open .sidebar{ transform: translateX(0); }
+
+  .sidebar-backdrop{ display:none; }
+
+  body.sidebar-open .sidebar-backdrop{
+    display:block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.35);
+    z-index: 14000;
+  }
+
+  .content{
+    margin-left: 0;
+    max-width: 100%;
+  }
+}
+
+/* desktop collapse */
+body.sidebar-collapsed{ --sidebar-w: 150px; }
+
+@media (max-width: 900px){
+
+  /* Sidebar sadržaj nek ide gore, ne space-between */
+  .sidebar{
+    justify-content: flex-start; /* umjesto space-between */
+    gap: 14px;
+    overflow-y: auto; /* ako je mali ekran */
+    padding-bottom: 18px;
+  }
+
+  /* Linkovi jedan ispod drugog */
+  .sidebar .nav{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .sidebar .nav li{
+    width: 100%;
+  }
+
+  .sidebar .nav a{
+    width: 100%;
+  }
+
+  /* Footer uvijek ispod linkova (i vidi se) */
+  .sidebar-footer{
+    margin-top: auto; 
+    padding: 14px 0 6px;
+	font-size: 12px;
+	opacity: 0.7;
+  }
+}
+
+@media (max-width: 900px){
+	.nav{ display: flex !important; 
+	flex-direction: column !important;}
+	
+}
+
+/* =========================
+   COMPACT MOBILE UI
+   (ne dira hamburger/sidebar logiku)
+   ========================= */
+@media (max-width: 900px){
+
+  /* općenito: manje "lufta" */
+  .content{ padding: 14px !important; }
+
+  /* kartice: manje padding/radius */
+  .card{
+    border-radius: 18px !important;
+  }
+
+  /* HERO */
+  .hero{
+    padding: 22px !important;
+    border-radius: 22px !important;
+  }
+  .hero h1{
+    font-size: 36px !important;
+    line-height: 1.05 !important;
+    margin-bottom: 8px !important;
+  }
+  .hero .muted{
+    font-size: 14px !important;
+    line-height: 1.45 !important;
+  }
+
+  /* gumbi kompaktniji */
+  .hero-actions{ gap: 8px !important; }
+  .btn{
+    padding: 10px 12px !important;
+    border-radius: 12px !important;
+    font-size: 14px !important;
+  }
+
+  /* badge/pills manji */
+  .badges{ gap: 6px !important; margin-top: 8px !important; }
+  .badge{
+    padding: 5px 8px !important;
+    font-size: 11px !important;
+  }
+
+  /* USP dio (kartice) – manje razmaka */
+  .home-panel{ padding: 14px !important; }
+  .usp{ gap: 10px !important; }
+  .usp-item{
+    padding: 10px 12px !important;
+    border-radius: 16px !important;
+  }
+  .usp-title{ font-size: 14px !important; }
+  .usp-desc{ font-size: 13px !important; margin-top: 4px !important; }
+
+  /* service kartice (Niskogradnja/Podvodni) */
+  .home-services{ gap: 10px !important; margin-top: 12px !important; }
+  .service-card{
+    padding: 14px !important;
+    border-radius: 18px !important;
+  }
+  .service-card h2{
+    font-size: 18px !important;
+    margin-bottom: 6px !important;
+  }
+  .service-card .muted{ font-size: 13px !important; }
+
+  /* naslovi na ostalim stranicama */
+  h1{ font-size: 30px !important; }
+  h2{ font-size: 18px !important; }
+  p{ font-size: 14px !important; }
+}

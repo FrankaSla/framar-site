@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="hr" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head(${pageTitle}, ${pageDesc}, ${ogImage}, ${ogUrl})}"></head>
+<style>
+	body{
+		opacity: 0;
+		animation: fadeIn 2s forwards;
+	}
+	@keyframes fadeIn {
+		to {
+			opacity: 1;
+		}
+	}
+</style>
+
+<body>
+<div class="layout">
+  <div th:replace="~{fragments/sidebar :: sidebar('kontakt')}"></div>
+
+  <main class="content">
+    <section class="card">
+      <h1>Kontakt</h1>
+
+      <div th:if="${successMessage}" class="alert" th:text="${successMessage}"></div>
+	  <div th:if="${errorMessage}" class="alert" th:text="${errorMessage}"></div>
+
+      <div class="grid">
+        <article class="card inset">
+          <h2>Podaci</h2>
+          <p><strong>FRAMAR - niskogradnja i podvodni radovi</strong></p>
+          <p>Vlasnik: Rodebr Sladoljev</p>
+          <p>Adresa: Matije Gupca 31, 22211, Vodice</p>
+          <p>OIB: 73570108959</p>
+          <p>Telefon: <a href="tel:+385959091974">+385 95 909 1974</a></p>
+          <p>E-mail: <a href="mailto:framarpodvodniradovi@gmail.com">framarpodvodniradovi@gmail.com</a></p>
+          <p>Radno vrijeme: pon-pet 08:00-16:00</p>
+        </article>
+
+        <article class="card inset">
+          <h2>Pošalji upit</h2>
+          <form method="post" th:action="@{/kontakt}" class="form">
+            <input type="text" name="website" style="display: none;">
+			<label>Ime i prezime</label>
+            <input name="ime" required>
+
+            <label>E-mail</label>
+            <input name="email" type="email" required>
+
+            <label>Poruka</label>
+            <textarea name="poruka" rows="5" required></textarea>
+
+            <button class="btn" type="submit">Pošalji</button>
+          </form>
+
+          <p class="muted small">
+            Poruka se šalje na službeni e-mail.
+          </p>
+        </article>
+      </div>
+    </section>
+  </main>
+</div>
+</body>
+</html>

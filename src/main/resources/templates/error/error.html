@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="hr" xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="~{fragments/head :: head(
+		'Greška - FRAMAR',
+		'Došlo je do greške.',
+		'/img/logo.png',
+		null
+	)}"></head>
+	
+	<body>
+		<div class="layout">
+			<div th:replace="~{framents/sidebar :: sidebar('')}"></div>
+			
+			<main class="content">
+				<section class="card">
+					<h1>Dogodila se greška</h1>
+					<p class="muted">
+						Pokušaj ponovno ili se vrati na naslovnu.
+					</p>
+					
+					<div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 14px;">
+						<a class="btn"
+							th:href="@{/}">Naslovna</a>
+						<a class="btn btn-ghost"
+							th:href="@{/kontakt}">Kontakt</a>
+					</div>
+				</section>
+			</main>
+		</div>
+	</body>
+</html>

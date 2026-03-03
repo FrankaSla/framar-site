@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="hr" xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="~{fragments/head :: head(${pageTitle}, ${pageDesc}, ${ogImage}, ${ogUrl})}"></head>
+	<style>
+		body {
+			opacity: 0;
+			animation: fadeIn 2s forwards;
+		}
+		@keyframes fadeIn{
+			to {
+				opacity: 1;
+			}
+		}
+	</style>
+	<body>
+		<div class="layout">
+			<div th:replace="~{fragments/sidebar :: sidebar('index')}"></div>
+			
+			
+			
+			<main class="content">
+				<section class="card hero">
+				  <div class="hero-left">
+				    <h1>FRAMAR</h1>
+				    <p class="muted">
+				      Niskogradnja i podvodni radovi. Pouzdana izvedba, kvalitetni materijali i profesionalan pristup na terenu.
+				    </p>
+				    <div class="hero-actions">
+				      <a class="btn" th:href="@{/kontakt}">Zatraži ponudu</a>
+				      <a class="btn btn-ghost" th:href="@{/projekti}">Pogledaj projekte</a>
+				    </div>
+
+				    <div class="badges">
+				      <span class="badge">Niskogradnja</span>
+				      <span class="badge">Podvodni radovi</span>
+				      <span class="badge">Vodice i okolica</span>
+				    </div>
+				  </div>
+				</section>
+
+				<!-- NOVO: sve ispod kao jedna cjelina -->
+				<section class="card home-panel">
+				  <div class="usp">
+				    <div class="usp-item">
+				      <div class="usp-title">Podvodni radovi i sanacije</div>
+				      <p class="usp-desc">Sigurna izvedba u specifičnim uvjetima mora.</p>
+				    </div>
+
+				    <div class="usp-item">
+				      <div class="usp-title">Brza organizacija</div>
+				      <p class="usp-desc">Uigran tim i logistika na terenu.</p>
+				    </div>
+
+				    <div class="usp-item">
+				      <div class="usp-title">Kvaliteta i odgovornost</div>
+				      <p class="usp-desc">Materijali, oprema i izvedba bez kompromisa.</p>
+				    </div>
+				  </div>
+
+				  <div class="home-services">
+				    <article class="service-card">
+				      <h2>Niskogradnja</h2>
+				      <p class="muted">Građenje građevina niskogradnje, izgradnja niskih građevina, završni građevinski radovi,
+						specijalizirane građevinske djelatnosti. </p>
+				    </article>
+
+				    <article class="service-card">
+				      <h2>Podvodni radovi</h2>
+				      <p class="muted">Građenje vodnih građevina, završni građevinski radovi, djelatnosti čišćenja, 
+						sakupljanje neopasnog materijala.</p>
+				    </article>
+				  </div>
+				</section>
+			</main>
+		</div>
+	</body>
+</html>

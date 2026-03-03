@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="hr" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head(${pageTitle}, ${pageDesc}, ${ogImage}, ${ogUrl})}"></head>
+<style>
+	body {
+		opacity: 0;
+		animation: fadeIn 2s forwards;
+	}
+	@keyframes fadeIn {
+		to {
+			opacity: 1;
+		}
+	}
+</style>
+<body>
+<div class="layout">
+  <div th:replace="~{fragments/sidebar :: sidebar('usluge')}"></div>
+
+  <main class="content">
+    <section class="card page">
+      <header class="page-head">
+        <h1>Naše usluge</h1>
+        <p class="muted">
+          FRAMAR pruža pouzdanu izvedbu na terenu — od pripreme i organizacije, do završnih radova i sanacija.
+        </p>
+      </header>
+
+      <div class="info-grid">
+        <article class="card inset info-card">
+          <h2>Registrirane djelatnosti</h2>
+          <ul class="clean-list">
+            <li>građenje vodnih građevina</li>
+            <li>građenje ostalih građevina niskogradnje</li>
+            <li>izgradnja niskih građevina (zidovi, prilazi, potporni i obalni elementi)</li>
+            <li>ostali završni građevinski radovi</li>
+            <li>ostale specijalizirane građevinske djelatnosti</li>
+            <li>ostale djelatnosti čišćenja</li>
+            <li>sakupljanje neopasnog otpada</li>
+          </ul>
+        </article>
+
+        <article class="card inset info-card">
+          <h2>Što dobivate</h2>
+          <ul class="check-list">
+            <li><b>Cjelovito rješenje</b> – od pripreme do završnih radova</li>
+            <li><b>Organizaciju i logistiku</b> prilagođenu terenu</li>
+            <li><b>Sigurnost i standarde</b> u svim fazama izvedbe</li>
+            <li><b>Jasnu komunikaciju</b> i dogovorene rokove</li>
+          </ul>
+        </article>
+      </div>
+
+      <section class="card inset block">
+        <h2>Naš pristup</h2>
+        <p class="muted">
+          Svaki projekt realiziramo uz fokus na kvalitetu i izvediv plan rada:
+        </p>
+
+        <div class="pill-grid">
+          <div class="pill">Detaljno planiranje i organizacija</div>
+          <div class="pill">Stručan i educiran tim</div>
+          <div class="pill">Pouzdana logistika i specijalizirana oprema</div>
+          <div class="pill">Sigurnosni i tehnički standardi</div>
+          <div class="pill">Rokovi i zadovoljstvo investitora</div>
+        </div>
+
+        <p class="muted" style="margin-top:12px;">
+          Naš cilj je izgraditi dugoročna partnerstva temeljena na povjerenju, kvaliteti i profesionalnosti.
+        </p>
+      </section>
+
+      <section class="card cta">
+        <div class="cta-text">
+          <h2>Trebaš ponudu ili savjet za projekt?</h2>
+          <p class="muted">Pošalji upit i javljamo se u najkraćem roku.</p>
+        </div>
+        <div class="cta-actions">
+          <a class="btn" th:href="@{/kontakt}">Zatraži ponudu</a>
+          <a class="btn btn-ghost" th:href="@{/projekti}">Pogledaj projekte</a>
+        </div>
+      </section>
+
+    </section>
+  </main>
+</div>
+</body>
+</html>

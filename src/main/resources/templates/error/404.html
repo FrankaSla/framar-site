@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="hr" xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="~{fragments/head :: head (${pageTitle}, ${pageDesc}, ${ogImage}, ${ogUrl})}"></head>
+		 <body>
+			<div class="layout">
+				<div th:replace="~{fragments/sidebar :: sidebar('')}"></div>
+				
+				<main class="content">
+					<section class="card">
+						<h1> 404 - Stranica nije pronađena</h1>
+						<p class="muted">
+							Možda je pogrešan link ili je stranica premještena.
+						</p>
+						
+						<div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 14px;">
+							<a class="btn"
+								th:href="@{/}">Naslovna</a>
+							<a class="btn btn-ghost"
+								th:href="@{/projekti}">Projekti</a>
+							<a class="btn btn-ghost"
+								th:href="@{/kontakt}">Kontakt</a>
+						</div>
+					</section>
+				</main>
+			</div>
+		 </body>
+</html>

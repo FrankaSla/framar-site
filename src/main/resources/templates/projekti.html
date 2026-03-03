@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="hr" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head(${pageTitle}, ${pageDesc}, ${ogImage}, ${ogUrl})}"></head>
+<style>
+	body {
+		opacity: 0;
+		animation: fadeIn 2s forwards;
+	}
+	@keyframes fadeIn {
+		to {
+			opacity: 1;
+		}
+	}
+</style>
+
+			
+<body>
+<div class="layout">
+  <div th:replace="~{fragments/sidebar :: sidebar('projekti')}"></div>
+
+  <main class="content">
+    <section class="card">
+      <h1>Naši projekti</h1>
+      <p class="muted">Dobro došli u galeriju. Pogledajte naše projekte.</p>
+
+      <div class="grid">
+        <a class="card inset project-card project-link" 
+		   th:each="p : ${projects}"
+		   th:href="@{'/projekti/' + ${p.slug}}"
+		   th:attr="aria-label=${p.title} + ' - detalji projekta'">
+			<div class="project-cover" th:if="${p.coverImage != null}">
+				<img th:src="@{${p.coverImage}}" 
+					 th:alt="${'Projekt: ' + p.title}" 
+					 loading="lazy">
+			</div>
+          	<div class="project-top">
+			<div class="project-badge" th:text="${p.type}">Tip</div>
+			<h2 th:text="${p.title}">Projekt</h2>
+			<p class="muted">
+				<span th:text="${p.location}">Lokacija</span> ·
+				<span th:text="${p.year}">Godina</span>
+			</p>
+		  </div>
+		  
+		  <p class="muted" th:text="${p.description}">Opis</p>
+		  
+		  <p class="muted small"> Klikni za galeriju i detalje → </p>
+        </a>
+      </div>
+    </section>
+  </main>
+</div>
+</body>
+</html>

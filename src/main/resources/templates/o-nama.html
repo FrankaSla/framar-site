@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="hr" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head(${pageTitle}, ${pageDesc}, ${ogImage}, ${ogUrl})}"></head>
+<style>
+	body {
+		opacity: 0;
+		animation: fadeIn 2s forwards;
+	}
+	@keyframes fadeIn {
+		to {
+			opacity: 1;
+		}
+	}
+</style>
+
+<body>
+<div class="layout">
+  <div th:replace="~{fragments/sidebar :: sidebar('o-nama')}"></div>
+
+  <main class="content">
+    <section class="card page">
+      <header class="page-head">
+        <h1>O nama</h1>
+        <p class="muted">
+          Obrt <b>FRAMAR</b> osnovan je 2024. godine s ciljem pružanja pouzdanih, stručnih i kvalitetnih usluga
+          u području građevinarstva, s posebnim naglaskom na <b>podvodne radove i vodne građevine</b>.
+        </p>
+      </header>
+
+      <div class="split">
+        <section class="card inset block">
+          <h2>Kako radimo</h2>
+          <p>
+            Naš rad temelji se na stručnosti, iskustvu, kvalitetnoj organizaciji i prilagođenoj logistici,
+            što nam omogućuje učinkovitu realizaciju i zahtjevnih projekata — kako na kopnu, tako i pod vodom.
+          </p>
+
+          <div class="mini-grid">
+            <div class="mini">
+              <div class="mini-title">Stručnost</div>
+              <div class="muted">Precizna izvedba i kontrola kvalitete.</div>
+            </div>
+            <div class="mini">
+              <div class="mini-title">Organizacija</div>
+              <div class="muted">Jasan plan i pouzdani rokovi.</div>
+            </div>
+            <div class="mini">
+              <div class="mini-title">Sigurnost</div>
+              <div class="muted">Standardi i odgovornost u svakom koraku.</div>
+            </div>
+			<div class="mini">
+				<div class="mini-title">Pouzdanost</div>
+				<div class="muted">Poštivanje dogovorenih rokova i odgovoran odnos prema investitoru.</div>
+			</div>
+          </div>
+        </section>
+
+        <section class="card inset block">
+          <h2>Specijalizacija</h2>
+          <ul class="check-list">
+            <li><b>podvodni građevinski radovi</b></li>
+            <li><b>izgradnja i sanacija riva</b></li>
+            <li><b>izgradnja i održavanje vodnih građevina</b></li>
+            <li><b>podvodno čišćenje i održavanje plovila</b> (brodova i brodica)</li>
+            <li><b>podvodni pregledi</b> brodova i konstrukcija</li>
+			<li><b>izrada, postavljanje i premiještanje blokova</b></li>
+			<li><b>postavljanje mooringa</b></li>
+			<li><b>podvodna inspekcija kamerom</b></li>
+			<li><b>podvodne intervencije kod morskih havarija</b></li>
+			<li><b>rad sa morskim padobranom</b></li>
+			<li><b>izvlaćenje olupina</b></li>
+          </ul>
+
+          <p class="muted" style="margin-top:12px;">
+            Takvi projekti zahtijevaju visoku razinu stručnosti, preciznu organizaciju rada,
+            specijaliziranu opremu i logistiku — što FRAMAR osigurava kroz svaki projekt.
+          </p>
+        </section>
+      </div>
+
+      <section class="card cta">
+        <div class="cta-text">
+          <h2>Želiš vidjeti realizirane radove?</h2>
+          <p class="muted">Pogledaj galerije projekata ili nam pošalji upit.</p>
+        </div>
+        <div class="cta-actions">
+          <a class="btn" th:href="@{/projekti}">Pogledaj projekte</a>
+          <a class="btn btn-ghost" th:href="@{/kontakt}">Kontakt</a>
+        </div>
+      </section>
+
+    </section>
+  </main>
+</div>
+</body>
+</html>
