@@ -16,6 +16,12 @@ public class PageController {
     public PageController(ProjectService projectService) {
         this.projectService = projectService;
     }
+    
+    private final MailService mailservice;
+    
+    public PageController(MailService mailService) {
+    	this.mailservice = mailservice;
+    }
 
     // helper: složi canonical URL (radi i na localhostu)
     private String fullUrl(HttpServletRequest req, String path) {
@@ -87,4 +93,28 @@ public class PageController {
         model.addAttribute("ogUrl", fullUrl(req, "/kontakt"));
         return "kontakt";
     }
+    
+    @PostMapping("/kontakt")
+    public String kontaktSend(
+            @RequestParam String ime,
+            @RequestParam String email,
+            @RequestParam String poruka,
+            @RequestParam(required = false) String website, // honeypot
+            RedirectAttributes ra
+    ) {
+        // anti-bot: ako je skriveno polje popunjeno, ignoriraj
+        if (website != null && !website.isBlank()) {
+            return "redirect:/kontakt";
+        }
+
+        try {
+            mailService.sendContact(ime, email, poruka);
+            ra.addFlashAttribute("successMessage", "Poruka je poslana. Javit ćemo se uskoro.");
+        } catch (Exception e) {
+            ra.addFlashAttribute("errorMessage", "Došlo je do greške pri slanju. Pokušajte ponovno.");
+        }
+
+        return "redirect:/kontakt";
+    }
+
 }
