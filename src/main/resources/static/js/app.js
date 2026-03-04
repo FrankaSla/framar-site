@@ -214,24 +214,5 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-  
-document.addEventListener('DOMContentLoaded', () => {
-	
-	const items = document.querySelectorAll('.reveal');
-	if (!items.length) return;
-	
-	items.forEach(el => el.classList.add("reveal--init"));
-	
-	const io = new IntersectionObserver((entries) => {
-		entries.forEach(e => {
-			if (entry.isIntersecting) {
-				e.target.classList.add("reveal--visible");
-			}
-		});
-	}, { threshold: 0.15 });
-		
-	items.forEach(el => io.observe(el));
-  });  
-
 
 

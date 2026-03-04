@@ -128,12 +128,15 @@ body::after{
   border-bottom: 1px solid rgba(255,255,255,.01);
   padding-bottom: 14px;
   margin-bottom: 14px;
+  margin-top: 10px;
+  text-decoration: none;
+  color: #ffffff;
 }
 
 .brand:hover{ background: rgba(255,255,255,.08); }
 
 .brand-logo{
-	width: 90px; 
+	width: 120px; 
 	height: auto;
 }
 
@@ -145,6 +148,13 @@ body::after{
 .brand-sub{ 
 	font-size: 13px; 
 	opacity: 0.8;
+}
+
+.brand-visited{
+	color: #ffffff;
+}
+.brand:hover{
+	color: #ffffff;
 }
 
 @media (min-width: 901px){
@@ -1438,8 +1448,9 @@ body.sidebar-collapsed{ --sidebar-w: 150px; }
 	}
 	
 	.mobile-header img{
-		height: 50px;
-		width: auto;
+		height: 70px;
+		width: 70px;
+		object-fit: contain;
 	}
 	
 	main{
@@ -1447,21 +1458,3 @@ body.sidebar-collapsed{ --sidebar-w: 150px; }
 	}
 }
 
-/* sekcija je "skrivena" dok ne ude u viewport*/
-
-.reveal{
-	opacity: 1;
-	transform: none;
-}
-
-.reveal.reveal--init{
-	opacity: 0;
-	transform: translateY(14px);
-	transition: opacity .6s ease, transform .6s ease;
-	will-change: opacity, transform;
-}
-
-.reveal.reveal--visible{
-	opacity: 1;
-	transform: translateY(0);
-}
