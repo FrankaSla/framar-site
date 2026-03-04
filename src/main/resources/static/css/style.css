@@ -1118,11 +1118,11 @@ body.sidebar-collapsed .nav a{
 	.sidebar-backdrop{
 		position: fixed;
 		inset: 0;
-		background: rgba(0,0,0,.45);
-		z-index: 9999;
+		background: rgba(0,0,0,.35);
+		z-index: 9998;
 		opacity: 0;
 		pointer-events: none;
-		transition: opacity .18s ease;
+		transition: opacity .2s ease;
 	}
 	
 	body.sidebar-open .sidebar-backdrop{
@@ -1160,15 +1160,15 @@ body.sidebar-collapsed .nav a{
 		display: grid;
 		place-items: center;
 		position: fixed;
-		top: 12px;
+		top: 95px;
 		left: 12px;
 		z-index: 10001;
 		
 		width: 44px;
 		height: 44px;
 		border-radius: 12px;
-		border: 1px solid rgba(255,255,255,.14);
-		background: rgba(14,42,58,.75);
+		border: 1px solid rgba(255,255,255,.25);
+		background: #0e2a3a;
 		color: #fff;
 		cursor: pointer;
 		backdrop-filter: blur(6px);
@@ -1231,6 +1231,10 @@ body.sidebar-collapsed .nav a{
   place-items: center;
   cursor: pointer;
   z-index: 20000;
+}
+
+body.sidebar-open{
+	overflow: hidden;
 }
 
 /* desktop: pomakni hamburger da bude uz sidebar (desno od njega) */
@@ -1383,4 +1387,62 @@ body.sidebar-collapsed{ --sidebar-w: 150px; }
   h1{ font-size: 30px !important; }
   h2{ font-size: 18px !important; }
   p{ font-size: 14px !important; }
+}
+
+/*MOBILE HEADER*/
+
+.mobile-header{
+	display: none;
+}
+
+@media (max-width:900px){
+	
+	.mobile-header{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		
+		height: 80px;
+		background: #0e2a3a;
+		
+		z-index: 10000;
+	}
+	
+	.mobile-header img{
+		height: 50px;
+		width: auto;
+	}
+	
+	main{
+		margin-top: 80px;
+	}
+}
+
+/* sekcija je "skrivena" dok ne ude u viewport*/
+
+.reveal{
+	opacity: 0;
+	transform: translateY(18px);
+	transition: opacity .6s ease, transform .6s ease;
+	will-change: opacity, transform;
+}
+
+/*kad ude u viewport*/
+.reveal.is-visible{
+	opacity: 1;
+	transform: translateY(0);
+}
+
+/*ako user ima reduced motion*/
+@media (prefers-reduced-motion: reduce){
+	.reveal{
+		opacity: 1;
+		transform: none;
+		transition: none;
+	}
 }

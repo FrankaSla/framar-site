@@ -214,7 +214,20 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-
+  
+document.addEventListener('DOMContentLoaded', () => {
+	
+	const items = document.querySelectorAll('.reveal');
+	const observer = new IntersectionObserver((entries) => {
+		entries.forEach(entry => {
+			if (entry.isIntersecting) {
+				every.targer.classList.add('is-visiable');
+			}
+		});
+	}, { threshold: 0.15 });
+		
+	items.forEach(el => observer.observe(el));
+  });  
 
 
 
