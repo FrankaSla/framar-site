@@ -36,6 +36,24 @@ public class ProjectService {
 						)
 				
 				),
+				
+				new Project(
+						"izvlaćenje-broda-padobranom",
+						"/img/projekti/izvlacenje-broda/02.jpg",
+						"Izvlaćenje broda s padobranom",
+						"Šibenski otoci",
+						"2025",
+						"Podvodne intervencije",
+						"Podvodne intervencije kod morskih havarija",
+						Arrays.asList(
+								MediaItem.image("/img/projekti/izvlacenje-broda/01.jpg"),
+								MediaItem.image("/img/projekti/izvlacenje-broda/02.jpg"),
+								MediaItem.image("/img/projekti/izvlacenje-broda/03.jpg"),
+								MediaItem.image("/img/projekti/izvlacenje-broda/04.jpg"),
+								MediaItem.image("/img/projekti/izvlacenje-broda/05.jpg")
+						)
+				),
+				
 			
 				new Project(
 						"prvić-luka-riva-sanacija",
