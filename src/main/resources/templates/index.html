@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="hr" xmlns:th="http://www.thymeleaf.org">
 	<head th:replace="~{fragments/head :: head(${pageTitle}, ${pageDesc}, ${ogImage}, ${ogUrl})}"></head>
+	
+	<th:block th:with="pageTitle='Framar - Niskogradnja i podvodni radovi | Vodice',
+					   pageDesc='Framar - Stručnjaci za niskogradnju i podvodne radove. Sjedište u Vodicama, radovi diljem Hrvatske.',
+					   ogImage='img/logo.png',
+					   ogUrl='https://framar.hr/' ">
+				   
 	<style>
 		body {
 			opacity: 0;
@@ -12,6 +18,8 @@
 			}
 		}
 	</style>
+	
+	</th:block>
 	<body>
 		<div class="layout">
 			<div th:replace="~{fragments/sidebar :: sidebar('index')}"></div>
@@ -21,9 +29,11 @@
 			<main class="content">
 				<section class="card hero">
 				  <div class="hero-left">
-				    <h1>FRAMAR</h1>
+				    <h1>FRAMAR - Niskogradnja i podvodni radovi</h1>
 				    <p class="muted">
-				      Niskogradnja i podvodni radovi. Pouzdana izvedba, kvalitetni materijali i profesionalan pristup na terenu.
+				      Stručnjaci za niskogradnjau i podvodne radove. 
+					  Pouzdana izvedba, kvalitetni materijali i profesionalan pristup na terenu.
+					  Izvodimo obalne, građevisnke i podvodne projekte diljem Hrvatske.
 				    </p>
 				    <div class="hero-actions">
 				      <a class="btn" th:href="@{/kontakt}">Zatraži ponudu</a>

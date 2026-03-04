@@ -18,6 +18,26 @@
 	  <meta property="og:url" th:content="${ogUrl}"/>
 
 	  <link rel="stylesheet" th:href="@{/css/style.css(v=2)}"/>
+	  
+	  <script type="application/ld + json">
+		{
+			"@context": "https://schema.org",
+			"@type": "LocalBusiness",
+			"name": "Framar",
+			"url": "https://framar.hr",
+			"address": {
+				"@type": "22211",
+				"addressLocality": "Vodice",
+				"addressCountry": "HR"
+			},
+			"areaServed": "Hrvatska",
+			"serviceType": [
+				"Niskogradnja",
+				"Podvodni radovi"
+			]
+		}
+	  </script>
+	  
 	</head>
 
 </html>
